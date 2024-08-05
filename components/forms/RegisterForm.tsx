@@ -5,25 +5,15 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "../ui/input";
+import { Form } from "@/components/ui/form";
 import CustomerFormField, { FormFieldType } from "../CustomerFormField";
 import { UserFormValidation } from "@/lib/validation";
 import { useState } from "react";
-import Image from "next/image";
 import { createUser } from "@/lib/actions/patient.action";
 import { useRouter } from "next/navigation";
 import SubmitButton from "../SubmitButton";
 
-function PtientForm() {
+function RegisterForm() {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
@@ -57,21 +47,6 @@ function PtientForm() {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
-        {/* <FormField
-          control={form.control}
-          name='username'
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Username</FormLabel>
-              <FormControl>
-                <Input placeholder='shadcn' {...field} />
-              </FormControl>
-
-              <FormMessage className='shad-error' />
-            </FormItem>
-          )}
-        /> */}
-        {/*! input form to take the user's name */}
         <CustomerFormField
           fieldType={FormFieldType.INPUT}
           control={form.control}
@@ -81,7 +56,6 @@ function PtientForm() {
           iconAlt='user'
         />
 
-        {/*! input form to take the user's email */}
         <CustomerFormField
           fieldType={FormFieldType.INPUT}
           control={form.control}
@@ -104,4 +78,4 @@ function PtientForm() {
   );
 }
 
-export default PtientForm;
+export default RegisterForm;
