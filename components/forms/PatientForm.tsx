@@ -57,26 +57,18 @@ function PtientForm() {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
-        {/* <FormField
-          control={form.control}
-          name='username'
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Username</FormLabel>
-              <FormControl>
-                <Input placeholder='shadcn' {...field} />
-              </FormControl>
+        <section className='mb-12 space-y-4'>
+          <h1 className='header'>Hi there 👋</h1>
+          <p className='text-dark-700'>Get started with appointments.</p>
+        </section>
 
-              <FormMessage className='shad-error' />
-            </FormItem>
-          )}
-        /> */}
         {/*! input form to take the user's name */}
         <CustomerFormField
           fieldType={FormFieldType.INPUT}
           control={form.control}
           name='username'
-          label='User Name'
+          label='Full name'
+          placeholder='ex: Diaa'
           iconSrc='/assets/icons/user.svg'
           iconAlt='user'
         />
@@ -89,6 +81,7 @@ function PtientForm() {
           label='Email'
           iconSrc='/assets/icons/email.svg'
           iconAlt='email'
+          placeholder='example@gmail.com'
         />
 
         <CustomerFormField
@@ -96,6 +89,7 @@ function PtientForm() {
           control={form.control}
           name='phone'
           label='Phone Number'
+          placeholder='0342 0453 34'
         />
 
         <SubmitButton isLoading={isLoading} />

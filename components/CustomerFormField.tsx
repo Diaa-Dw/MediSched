@@ -9,8 +9,11 @@ import {
 } from "./ui/form";
 import { Input } from "./ui/input";
 import Image from "next/image";
-import "react-phone-number-input/style.css";
+import DatePicker from "react-datepicker";
 import PhoneInput from "react-phone-number-input";
+//*css
+import "react-phone-number-input/style.css";
+import "react-datepicker/dist/react-datepicker.css";
 
 export enum FormFieldType {
   "INPUT" = "input",
@@ -69,8 +72,34 @@ const RenderInput = ({ field, props }: { field: any; props: CustomProps }) => {
           <FormControl>
             <PhoneInput
               defaultCountry='PS'
+              placeholder={placeholder}
               className='shad-input border-0 pl-2'
               {...field}
+            />
+          </FormControl>
+        </div>
+      );
+
+    case FormFieldType.DATE_PICKER:
+      return (
+        <div className='flex rounded-md border border-dark-500 bg-dark-400'>
+          {iconSrc && (
+            <Image
+              src={iconSrc}
+              alt={iconAlt || "icon"}
+              width={24}
+              height={24}
+              className='ml-2'
+            />
+          )}
+          <FormControl>
+            <DatePicker
+              placeholder={placeholder}
+              {...field}
+              selected={field.value}
+              onChange={(date) => field.onChange(date)}
+              className='date-picker'
+              dateFormat='dd/MM/yyyy'
             />
           </FormControl>
         </div>

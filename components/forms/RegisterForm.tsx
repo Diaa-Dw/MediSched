@@ -7,7 +7,7 @@ import { z } from "zod";
 
 import { Form } from "@/components/ui/form";
 import CustomerFormField, { FormFieldType } from "../CustomerFormField";
-import { UserFormValidation } from "@/lib/validation";
+import { PatientFormValidation } from "@/lib/validation";
 import { useState } from "react";
 import { createUser } from "@/lib/actions/patient.action";
 import { useRouter } from "next/navigation";
@@ -19,24 +19,22 @@ function RegisterForm() {
 
   // ...
 
-  const form = useForm<z.infer<typeof UserFormValidation>>({
-    resolver: zodResolver(UserFormValidation),
+  const form = useForm<z.infer<typeof PatientFormValidation>>({
+    resolver: zodResolver(PatientFormValidation),
     defaultValues: {
       username: "",
       email: "",
       phone: "",
+      birthDate: new Date(Date.now()),
     },
   });
 
-  async function onSubmit(values: z.infer<typeof UserFormValidation>) {
+  async function onSubmit(values: z.infer<typeof PatientFormValidation>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
     setIsLoading(true);
     try {
-      const newUser = await createUser(values);
-      if (newUser) {
-        router.push(`/patients/${newUser.$id}/register`);
-      }
+      console.log(values);
     } catch (error) {
       console.error(`error in patient form \n ${error}`);
     } finally {
@@ -46,31 +44,122 @@ function RegisterForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
-        <CustomerFormField
-          fieldType={FormFieldType.INPUT}
-          control={form.control}
-          name='username'
-          label='User Name'
-          iconSrc='/assets/icons/user.svg'
-          iconAlt='user'
-        />
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className='flex-1 space-y-12'
+      >
+        <section className='space-y-4 mb-12'>
+          <h1 className='header'>Welcome 👋</h1>
+          <p className='text-dark-700'>Let us know more about yourself</p>
+        </section>
 
-        <CustomerFormField
-          fieldType={FormFieldType.INPUT}
-          control={form.control}
-          name='email'
-          label='Email'
-          iconSrc='/assets/icons/email.svg'
-          iconAlt='email'
-        />
+        <section className='space-y-6'>
+          <div className='mb-9 space-y-1'>
+            <h2 className='sub-header'>Personal Information</h2>
+          </div>
 
-        <CustomerFormField
-          fieldType={FormFieldType.PHONE_INPUT}
-          control={form.control}
-          name='phone'
-          label='Phone Number'
-        />
+          <CustomerFormField
+            fieldType={FormFieldType.INPUT}
+            control={form.control}
+            name='username'
+            label='Full name'
+            placeholder='ex: Diaa'
+            iconSrc='/assets/icons/user.svg'
+            iconAlt='user'
+          />
+
+          <div className='flex flex-col gap-6 xl:flex-row'>
+            <CustomerFormField
+              fieldType={FormFieldType.INPUT}
+              control={form.control}
+              name='email'
+              label='Email'
+              placeholder='example@gmail.com'
+              iconSrc='/assets/icons/email.svg'
+              iconAlt='email'
+            />
+
+            <CustomerFormField
+              fieldType={FormFieldType.PHONE_INPUT}
+              control={form.control}
+              name='phone'
+              label='Phone Number'
+            />
+          </div>
+
+          <div className='flex flex-col gap-6 xl:flex-row'>
+            <CustomerFormField
+              fieldType={FormFieldType.DATE_PICKER}
+              control={form.control}
+              name='birthDate'
+              label='Date of birth'
+              placeholder='Select your birth date'
+              iconSrc='/assets/icons/calendar.svg'
+              iconAlt='calendar'
+            />
+
+            <CustomerFormField
+              fieldType={FormFieldType.PHONE_INPUT}
+              control={form.control}
+              name='phone'
+              label='Phone Number'
+            />
+          </div>
+        </section>
+
+        <section className='space-y-6'>
+          <div className='mb-9 space-y-1'>
+            <h2 className='sub-header'>Personal Information</h2>
+          </div>
+
+          <CustomerFormField
+            fieldType={FormFieldType.INPUT}
+            control={form.control}
+            name='username'
+            label='Full name'
+            placeholder='ex: Diaa'
+            iconSrc='/assets/icons/user.svg'
+            iconAlt='user'
+          />
+
+          <div className='flex flex-col gap-6 xl:flex-row'>
+            <CustomerFormField
+              fieldType={FormFieldType.INPUT}
+              control={form.control}
+              name='email'
+              label='Email'
+              placeholder='example@gmail.com'
+              iconSrc='/assets/icons/email.svg'
+              iconAlt='email'
+            />
+
+            <CustomerFormField
+              fieldType={FormFieldType.PHONE_INPUT}
+              control={form.control}
+              name='phone'
+              label='Phone Number'
+            />
+          </div>
+
+          <div className='flex flex-col gap-6 xl:flex-row'>
+            <CustomerFormField
+              fieldType={FormFieldType.DATE_PICKER}
+              control={form.control}
+              name='birthDate'
+              label='Date of birth'
+              placeholder='Select your birth date'
+              iconSrc='/assets/icons/calendar.svg'
+              iconAlt='calendar'
+            />
+
+            <CustomerFormField
+              fieldType={FormFieldType.}
+              control={form.control}
+              name='phone'
+              label='Phone Number'
+            />
+          </div>
+        </section>
 
         <SubmitButton isLoading={isLoading} />
       </form>

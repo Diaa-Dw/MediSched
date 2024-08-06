@@ -6,7 +6,7 @@ import Link from "next/link";
 export default function Home() {
   return (
     <div className='flex h-screen max-h-screen'>
-      <section className='container remove-scrollbar my-auto'>
+      <section className='container remove-scrollbar'>
         <div className='sub-container max-w-[496px]'>
           <Image
             src='/assets/icons/logo-full.svg'
@@ -15,6 +15,7 @@ export default function Home() {
             height={1000}
             className='mb-12 h-10 w-fit'
           />
+
           <PtientForm />
 
           <div className='text-14-regular mt-20 flex justify-between items-center'>
