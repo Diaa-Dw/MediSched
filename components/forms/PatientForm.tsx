@@ -32,7 +32,7 @@ function PtientForm() {
   const form = useForm<z.infer<typeof UserFormValidation>>({
     resolver: zodResolver(UserFormValidation),
     defaultValues: {
-      username: "",
+      name: "",
       email: "",
       phone: "",
     },
@@ -66,7 +66,7 @@ function PtientForm() {
         <CustomerFormField
           fieldType={FormFieldType.INPUT}
           control={form.control}
-          name='username'
+          name='name'
           label='Full name'
           placeholder='ex: Diaa'
           iconSrc='/assets/icons/user.svg'

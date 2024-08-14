@@ -3,17 +3,23 @@ import { Button } from "./ui/button";
 
 interface SubmitButtonParams {
   isLoading: boolean;
+  className: string;
+  buttonLabel: string | undefined;
 }
 
-const SubmitButton = ({ isLoading }: SubmitButtonParams) => {
+const SubmitButton = ({
+  isLoading,
+  className,
+  buttonLabel,
+}: SubmitButtonParams) => {
   return (
     <Button
       type='submit'
-      className='text-center w-full bg-green-500 rounded-md'
+      className={`text-center w-full bg-green-500 rounded-md ${className}`}
       disabled={isLoading}
     >
       {isLoading ? (
-        <div className='flex items-center gap-3'>
+        <div className={`flex items-center gap-3 `}>
           <Image
             src='/assets/icons/loader.svg'
             alt='spinner'
@@ -23,6 +29,8 @@ const SubmitButton = ({ isLoading }: SubmitButtonParams) => {
           />
           <span>Loading...</span>
         </div>
+      ) : buttonLabel ? (
+        buttonLabel
       ) : (
         "Submit"
       )}

@@ -1,38 +1,39 @@
-import PtientForm from "@/components/forms/PatientForm";
-import RegisterForm from "@/components/forms/RegisterForm";
 import Image from "next/image";
-import Link from "next/link";
+import { redirect } from "next/navigation";
 
-export default function Home() {
+import RegisterForm from "@/components/forms/RegisterForm";
+import { getUser } from "@/lib/actions/patient.action";
+
+const Register = async ({ params: { userId } }: SearchParamProps) => {
+  const user = await getUser(userId);
+
   return (
     <div className='flex h-screen max-h-screen'>
-      <section className='container remove-scrollbar'>
-        <div className='sub-container max-w-[860px]'>
+      <section className='remove-scrollbar container'>
+        <div className='sub-container max-w-[860px] flex-1 flex-col py-10'>
           <Image
             src='/assets/icons/logo-full.svg'
-            alt='care-pulse'
-            width={1000}
             height={1000}
+            width={1000}
+            alt='patient'
             className='mb-12 h-10 w-fit'
           />
 
-          <RegisterForm />
+          <RegisterForm user={user} />
 
-          <div className='text-14-regular mt-20 flex justify-between items-center'>
-            <p className=' text-dark-600'>© 2024 CarePluse</p>
-            <Link href='/?admin=true' className='text-green-500'>
-              Admin
-            </Link>
-          </div>
+          <p className='copyright py-12'>© 2024 CarePluse</p>
         </div>
       </section>
+
       <Image
         src='/assets/images/register-img.png'
-        alt='patient'
-        width={1000}
         height={1000}
+        width={1000}
+        alt='patient'
         className='side-img max-w-[390px]'
       />
     </div>
   );
-}
+};
+
+export default Register;
