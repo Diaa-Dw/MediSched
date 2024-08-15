@@ -4,6 +4,7 @@ import {
   APPOINTEMNT_COLLECTION_ID,
   DATABASE_ID,
   databeses,
+  messaging,
 } from "../appwrite.config";
 import { parseStringify } from "../utils";
 import { Appointment } from "@/types/appwrite.types";
@@ -97,10 +98,31 @@ export const updateAppointment = async ({
     if (!updatedAppointment) {
       throw new Error(`Appointment not found`);
     }
+
+    const smsMessage = `Hi, it's carePulse. 
+    your appointment has been ${type}.`;
+
+    await sendSMSNotification(userId, smsMessage);
+
     //*SMS notification
     revalidatePath("/admin");
     return parseStringify(updatedAppointment);
   } catch (error) {
     console.log(`Somthing went wrong while updating appointment ${error}`);
+  }
+};
+
+export const sendSMSNotification = async (userId: string, content: string) => {
+  try {
+    const message = await messaging.createSms(
+      ID.unique(),
+      content,
+      [],
+      [userId]
+    );
+
+    return parseStringify(message);
+  } catch (error) {
+    console.log(error);
   }
 };
