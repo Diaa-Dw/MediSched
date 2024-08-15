@@ -17,6 +17,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { Select, SelectContent, SelectTrigger, SelectValue } from "./ui/select";
 import { Textarea } from "./ui/textarea";
 import { Checkbox } from "./ui/checkbox";
+import { Control } from "react-hook-form";
 
 export enum FormFieldType {
   "INPUT" = "input",

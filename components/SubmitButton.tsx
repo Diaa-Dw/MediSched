@@ -3,8 +3,8 @@ import { Button } from "./ui/button";
 
 interface SubmitButtonParams {
   isLoading: boolean;
-  className: string;
-  buttonLabel: string | undefined;
+  className?: string;
+  buttonLabel?: string | undefined;
 }
 
 const SubmitButton = ({
