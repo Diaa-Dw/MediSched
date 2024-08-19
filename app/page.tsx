@@ -22,7 +22,7 @@ export default function Home({ searchParams }: SearchParamProps) {
           <PtientForm />
 
           <div className='text-14-regular mt-20 flex justify-between items-center'>
-            <p className=' text-dark-600'>© 2024 CarePluse</p>
+            <p className=' text-dark-600'>© 2024 MediSched</p>
             <Link href='/?admin=true' className='text-green-500'>
               Admin
             </Link>
@@ -30,11 +30,11 @@ export default function Home({ searchParams }: SearchParamProps) {
         </div>
       </section>
       <Image
-        src='/assets/images/onboarding-img.png'
+        src='/assets/images/onboarding-img.jpg'
         alt='patient'
         width={1000}
         height={1000}
-        className='side-img max-w-[50%]'
+        className='side-img h-fit max-w-[40%]'
       />
     </div>
   );

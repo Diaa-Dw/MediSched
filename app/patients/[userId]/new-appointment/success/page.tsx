@@ -72,7 +72,7 @@ const Success = async ({
           </Link>
         </Button>
 
-        <p className='copyright'>© 2024 CarePulse</p>
+        <p className='copyright'>© 2024 MediSched</p>
       </div>
     </div>
   );

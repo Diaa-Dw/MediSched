@@ -99,7 +99,7 @@ export const updateAppointment = async ({
       throw new Error(`Appointment not found`);
     }
 
-    const smsMessage = `Hi, it's carePulse. 
+    const smsMessage = `Hi, it's MediSched. 
     your appointment has been ${type}.`;
 
     await sendSMSNotification(userId, smsMessage);
